@@ -24,9 +24,10 @@ class PlatformChannelController{
     channel.setMethodCallHandler{ (call, result) in
     switch call.method {
     case "utils:send-sms":
-      let alert = UIAlertController(title: "Mensaje", message: "Hola", preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: nil))
-      self.viewController.present(alert, animated: true, completion: nil)
+      updateUI()
+      // let alert = UIAlertController(title: "Mensaje", message: "Hola", preferredStyle: .alert)
+      // alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: nil))
+      // self.viewController.present(alert, animated: true, completion: nil)
       break;
     default:
       break;
@@ -34,4 +35,12 @@ class PlatformChannelController{
     }
   }
 
+  func updateUI(){
+        messageView.layer.shadowColor = UIColor.black.cgColor
+        messageView.layer.shadowOpacity = 0.2
+        messageView.layer.shadowOffset = .zero
+        messageView.layer.shadowRadius = 10
+        self.inviteMessage.text = "Hi, @ Check out Atlantic City App, Get it for free at \(inviteLink)"
+        self.inviteMessage.becomeFirstResponder()   
+    }
 }
