@@ -24,23 +24,21 @@ class PlatformChannelController{
     channel.setMethodCallHandler{ (call, result) in
     switch call.method {
     case "utils:send-sms":
-      updateUI()
       // let alert = UIAlertController(title: "Mensaje", message: "Hola", preferredStyle: .alert)
       // alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: nil))
       // self.viewController.present(alert, animated: true, completion: nil)
+     if MFMessageComposeViewController.canSendText() == true{
+                let recipients:[String] = ["+5358193403"]
+                let messageController = MFMessageComposeViewController()
+                messageController.messageComposeDelegate  = self // implement delegate if you want
+                messageController.recipients = recipients
+                messageController.body = "Esto es un mensaje de prueba"
+                self.viewController.present(messageController, animated: true, completion: nil)
+            }
       break;
     default:
       break;
     }
     }
   }
-
-  func updateUI(){
-        messageView.layer.shadowColor = UIColor.black.cgColor
-        messageView.layer.shadowOpacity = 0.2
-        messageView.layer.shadowOffset = .zero
-        messageView.layer.shadowRadius = 10
-        self.inviteMessage.text = "Hi, @ Check out Atlantic City App, Get it for free at \(inviteLink)"
-        self.inviteMessage.becomeFirstResponder()   
-    }
 }
